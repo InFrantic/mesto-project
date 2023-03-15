@@ -18,5 +18,7 @@
 
 Весь проект выполнен в редакторе *VS Code*.  
 
+Сайт - https://infrantic.github.io/mesto-project/
+
 ## Авторы  
 *Ракин Владислав* **(InFrantic)**
