@@ -1,0 +1,17 @@
+.element__like {
+    width: 22px;
+    height: 19px;
+    margin: 0 30px 0;
+    border: none;
+    background-image: url(../../../images/like.svg);
+    align-self: center;
+}
+
+.element__like:focus {
+    background-image: url(../../../images/Union.svg);
+}
+
+.element__like:hover {
+    opacity: 0.5;
+    cursor: pointer;
+}
