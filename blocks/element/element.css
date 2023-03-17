@@ -1,7 +1,0 @@
-.element {
-    display: grid;
-    background: #FFFFFF;
-    border-radius: 10px;
-    position: relative;
-    grid-template-columns: 1fr;
-}
