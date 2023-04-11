@@ -1,0 +1,19 @@
+.element__like{
+    background-image: url(../../../images/Hwhite.svg);
+    width:22px;
+    height: 19px;
+    background-color: transparent;
+    border: 0;
+    margin-right: 5px;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+
+.element__like:hover{
+    opacity: 0.5;
+}
+
+.element__like:active{
+    background-image: url(../../../images/HBLACK.png);
+}
