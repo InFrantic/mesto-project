@@ -15,6 +15,5 @@
 Не забудьте [оптимизировать картинки](https://tinypng.com/), чтобы ваш сайт загружался быстрее.
 
 
-**Ссылка на проект - https://agapkinroma.github.io/mesto-project/
-
+**Ссылка на проект -   https://agapkinroma.github.io/mesto-project/
 Удачи!
