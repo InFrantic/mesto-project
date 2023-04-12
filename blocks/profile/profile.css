@@ -2,7 +2,7 @@
     padding:40px 0 48px;
     display: grid;
     justify-items: center;
-    grid-template-columns: min-content min-content 1fr;
+    grid-template-columns: min-content 1fr 1fr;
 }
 
 @media screen and (max-width:879px){
