@@ -1,4 +1,4 @@
-const popupEditProfile = document.querySelectorAll('.popup')
+const popups = document.querySelectorAll('.popup')
 const editProfile = document.querySelector('.popup_editprof');
 const popupAddElement = document.querySelector('.popup_elem');
 const profileName = document.querySelector('#name');
@@ -39,11 +39,11 @@ const initialCards = [
     }
 ];
 
-function addElementListeners(element, elementdata) {
+function addElementListeners(element, cardData) {
     element.querySelector('.element__like').addEventListener('click', likeBtn);
     element.querySelector('#delete').addEventListener('click', deleteBtn);
     element.querySelector('#image').addEventListener("click", () => {
-        openPopupElemShow(elementdata);
+        openPopupElemShow(cardData);
     });
 }
 
@@ -75,18 +75,18 @@ function createElem(data) {
     return newElement;
 }
 
-function editProfileCard() {
+function setUserInfo() {
     profileName.textContent = nameInput.value;
     profileJob.textContent = jobInput.value;
 }
 
-function editProfileInputs() {
+function openEditProfilePopup() {
     nameInput.value = profileName.textContent;
     jobInput.value = profileJob.textContent;
     showPopup(editProfile);
 }
 
-function addTemplate(data) {
+function renderCard(data) {
     const elemClone = createElem(data)
     elements.prepend(elemClone);
 }
@@ -95,14 +95,14 @@ function addElementCard(evt) {
     evt.preventDefault();
     const addplace = evt.target.querySelector('#place').value;
     const addLink = evt.target.querySelector('#link').value;
-    addTemplate({ name: addplace, link: addLink });
+    renderCard({ name: addplace, link: addLink });
     evt.target.reset();
     hidePopup(popupAddElement);
 }
 
-initialCards.map(addTemplate)
+initialCards.map(renderCard)
 
-popupEditProfile.forEach(popup => {
+popups.forEach(popup => {
     const btnClose = popup.querySelector('.popup__close-button');
     btnClose.addEventListener('click', () => hidePopup(popup))
 })
@@ -117,12 +117,12 @@ function hidePopup(popup) {
     document.removeEventListener('keydown', closeByEsc);
 }
 
-const addButton = document.querySelector('#addplace');
-const editButton = document.querySelector('#editprofile');
-const imgButton = document.querySelector('#image');
+const buttonOpenAddCardPopup = document.querySelector('#addplace');
+const buttonOpenEditProfilePopup = document.querySelector('#editprofile');
+const buttonOpenImagPopup = document.querySelector('#image');
 
-addButton.addEventListener('click', () => showPopup(popupAddElement));
-editButton.addEventListener('click', editProfileInputs);
+buttonOpenAddCardPopup.addEventListener('click', () => showPopup(popupAddElement));
+buttonOpenEditProfilePopup.addEventListener('click', openEditProfilePopup);
 
 function closeByEsc(evt) {
     if (evt.key === "Escape") {
@@ -133,23 +133,25 @@ function closeByEsc(evt) {
 
 const elemImg = imgFullscreen.querySelector('.popup__fullscreen');
 
-function openPopupElemShow(elementdata) {
-    elemImg.src = elementdata.link;
-    elemImg.alt = elementdata.name;
-    titlePopup.textContent = elementdata.name;
+function openPopupElemShow(cardData) {
+    elemImg.src = cardData.link;
+    elemImg.alt = cardData.name;
+    titlePopup.textContent = cardData.name;
     showPopup(imgFullscreen);
 };
 
 profileFormAdd.addEventListener('submit', function (evt) {
     evt.preventDefault();
-    editProfileCard();
+    setUserInfo();
     hidePopup(editProfile);
 });
 
-popupEditProfile.forEach((popup) => {
+popups.forEach((popup) => {
     popup.addEventListener('click', (evt) => {
         if (evt.target.classList.contains(popupActiveClass)) {
             hidePopup(popup);
         }
     })
 }) 
+
+//Благодарю за подсказки, постараюсь найти время для проработки ошибок, связанных с некорректным написанием функций
