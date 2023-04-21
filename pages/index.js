@@ -39,8 +39,8 @@ const initialCards = [
     }
 ];
 
-function ElementAddListeners(element, elementdata) {
-    element.querySelector('.element__like').addEventListener('click', LikeBtn);
+function addElementListeners(element, elementdata) {
+    element.querySelector('.element__like').addEventListener('click', likeBtn);
     element.querySelector('#delete').addEventListener('click', deleteBtn);
     element.querySelector('#image').addEventListener("click", () => {
         openPopupElemShow(elementdata);
@@ -52,13 +52,13 @@ function deleteBtn(evt) {
     elem.remove();
 }
 
-function LikeBtn(evt) {
+function likeBtn(evt) {
     const btn = evt.target
     btn.classList.toggle('element__like_active');
 }
 
 const addElementSubmit = popupAddElement.querySelector('#newplace');
-addElementSubmit.addEventListener('submit', ElementAdd);
+addElementSubmit.addEventListener('submit', addElementCard);
 
 const templateElement = document.querySelector('#template').content;
 const newElement = templateElement.querySelector('.element')
@@ -71,17 +71,16 @@ function createElem(data) {
     elementImage.alt = data.name;
     newElement.querySelector('.element__text').textContent = data.name;
 
-    ElementAddListeners(newElement, data);
+    addElementListeners(newElement, data);
     return newElement;
-
 }
 
-function Profile() {
+function editProfileCard() {
     profileName.textContent = nameInput.value;
     profileJob.textContent = jobInput.value;
 }
 
-function ProfileInputs() {
+function editProfileInputs() {
     nameInput.value = profileName.textContent;
     jobInput.value = profileJob.textContent;
     showPopup(editProfile);
@@ -92,7 +91,7 @@ function addTemplate(data) {
     elements.prepend(elemClone);
 }
 
-function ElementAdd(evt) {
+function addElementCard(evt) {
     evt.preventDefault();
     const addplace = evt.target.querySelector('#place').value;
     const addLink = evt.target.querySelector('#link').value;
@@ -123,7 +122,7 @@ const editButton = document.querySelector('#editprofile');
 const imgButton = document.querySelector('#image');
 
 addButton.addEventListener('click', () => showPopup(popupAddElement));
-editButton.addEventListener('click', ProfileInputs);
+editButton.addEventListener('click', editProfileInputs);
 
 function closeByEsc(evt) {
     if (evt.key === "Escape") {
@@ -143,7 +142,7 @@ function openPopupElemShow(elementdata) {
 
 profileFormAdd.addEventListener('submit', function (evt) {
     evt.preventDefault();
-    Profile();
+    editProfileCard();
     hidePopup(editProfile);
 });
 
