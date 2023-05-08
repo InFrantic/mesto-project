@@ -1,4 +1,5 @@
-.popup__input-block{
+.popup-cards__form{
+    border:none;
     display: flex;
     flex-direction: column;
 }
