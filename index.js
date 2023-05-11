@@ -55,12 +55,12 @@ popupImgCloseButton.addEventListener('click',() => {
 })
 
 //функция Редактирование профиля
+nameInput.value = profileName.textContent;
+jobInput.value = profileStatus.textContent;
 function formSubmitHandler(evt) {
   evt.preventDefault();
   profileName.textContent = nameInput.value;
   profileStatus.textContent = jobInput.value;
-  nameInput.value = profileName.textContent;
-  jobInput.value = profileStatus.textContent;
   closePopup(popupEdit)
 
 }
@@ -130,3 +130,4 @@ function showPopupPhotoScale(img, title) {
   popupImgText.textContent = title;
 }
 
+const dasdsa= document.querySelector('.jop  ')
