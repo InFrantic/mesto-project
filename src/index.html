@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mesto</title>
+</head>
+
+<body class="page">
+    <header class="header">
+        <img src="<%=require('./images/logo-mesto.svg')%>" alt="логотип место" class="header__logo">
+    </header>
+    <main>
+        <section class="profile">
+            <div class="profile__edit-avatar">
+                <img src="<%=require('./images/Avatar.jpg')%>" alt="ваш аватар" class="profile__avatar">
+            </div>
+            <div class="profile__info">
+                <h1 id='name' class="profile__name">Жак-Ив Кусто</h1>
+                <p id='job' class="profile__description">Исследователь океана</p>
+                <button id="editprofile" type="button" class="profile__edit">
+                    <img src="<%=require('./images/edit-prifile.svg')%>" alt="Кнопка изменения профиля"
+                        class="profile__edit-button">
+                </button>
+            </div>
+            <button id="addplace" type="button" class="profile__add-image">
+                <img src="<%=require('./images/add-button.svg')%>" alt="кнопка добавления фото"
+                    class="profile__add-button">
+            </button>
+        </section>
+        <section class="elements">
+
+        </section>
+
+    </main>
+    <footer class="footer">
+        <p class="footer__copyright">© 2023 Mesto Russia</p>
+    </footer>
+
+    <div class="popup popup_editprof">
+        <div class="popup__container">
+            <form id='profile' class="popup__content" name="profile" novalidate>
+                <button id='editclose' type="button" class="popup__close">
+                    <img src="<%=require('./images/Close.svg')%>" alt="кнопка закрытия" class="popup__close-button">
+                </button>
+                <h3 class="popup__title">Редактировать профиль</h3>
+                <input id="username" type="text" class="popup__input" name="username" placeholder="Имя"
+                    value="Жак-Ив Кусто" minlength="2" maxlength="40" required>
+                <span class="popup__input-error" id="username-error"></span>
+                <input id="description" type="text" class="popup__input" name="description" placeholder="Описание"
+                    value="Исследователь океана" minlength="2" maxlength="200" required>
+                <span class="popup__input-error" id="description-error"></span>
+                <button type="submit" class="popup__save">Сохранить</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="popup popup_elem">
+        <div class="popup__container">
+            <form id='newplace' class="popup__content" name="newplace" novalidate>
+                <button id='addclose' type="button" class="popup__close">
+                    <img src="<%=require('./images/Close.svg')%>" alt="кнопка закрытия" class="popup__close-button">
+                </button>
+                <h3 class="popup__title">Новое место</h3>
+                <input id="place" type="text" class="popup__input" name="place" placeholder="Название" minlength="2"
+                    maxlength="30" required>
+                <span class="popup__input-error" id="place-error"></span>
+                <input id="link" type="url" class="popup__input" name="link" placeholder="Ссылка на картинку" required>
+                <span class="popup__input-error" id="link-error"></span>
+                <button id='create' type="submit" class="popup__save">Создать</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="popup popup_full">
+        <div class="popup__fullscreen-container">
+            <button id='fullclose' type="button" class="popup__close">
+                <img src="<%=require('./images/Close.svg')%>" alt="кнопка закрытия" class="popup__close-button">
+            </button>
+            <img alt="Фотография на весь экран" class="popup__fullscreen">
+            <p class="popup__fullscreen-text"></p>
+        </div>
+    </div>
+
+    <template id="template">
+        <article class="element">
+            <img id="image" alt="Фото места" class="element__image">
+            <button id="delete" type="button" class="element__trash"></button>
+            <h2 class="element__text"></h2>
+            <button type="button" class="element__like"></button>
+        </article>
+    </template>
+</body>
+
+</html>
