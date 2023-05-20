@@ -47,10 +47,14 @@
                 </button>
                 <h3 class="popup__title">Редактировать профиль</h3>
                 <input id="username" type="text" class="popup__input" name="username" placeholder="Имя"
-                    value="Жак-Ив Кусто" minlength="2" maxlength="40" required>
+                    value="Жак-Ив Кусто" minlength="2" maxlength="40" pattern="^[a-zA-Z]+$"
+                    data-error-message="Разрешены только латинские буквы, кириллические буквы, знаки дефиса и пробелы"
+                    required>
                 <span class="popup__input-error" id="username-error"></span>
                 <input id="description" type="text" class="popup__input" name="description" placeholder="Описание"
-                    value="Исследователь океана" minlength="2" maxlength="200" required>
+                    value="Исследователь океана" minlength="2" maxlength="200" pattern="^[a-zA-Z]+$"
+                    data-error-message="Разрешены только латинские буквы, кириллические буквы, знаки дефиса и пробелы"
+                    required>
                 <span class="popup__input-error" id="description-error"></span>
                 <button type="submit" class="popup__save">Сохранить</button>
             </form>
@@ -65,7 +69,9 @@
                 </button>
                 <h3 class="popup__title">Новое место</h3>
                 <input id="place" type="text" class="popup__input" name="place" placeholder="Название" minlength="2"
-                    maxlength="30" required>
+                    maxlength="30" pattern="^[a-zA-Z]+$"
+                    data-error-message="Разрешены только латинские буквы, кириллические буквы, знаки дефиса и пробелы"
+                    required>
                 <span class="popup__input-error" id="place-error"></span>
                 <input id="link" type="url" class="popup__input" name="link" placeholder="Ссылка на картинку" required>
                 <span class="popup__input-error" id="link-error"></span>

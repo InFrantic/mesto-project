@@ -1,7 +1,8 @@
 import './pages/index.css';
-import { enableValidation } from './blocks/components/validate.js';
-import './blocks/components/utils.js'
-import './blocks/components/modal.js'
+import { enableValidation } from './components/validate.js';
+import './components/utils.js'
+import './components/modal.js'
+import './components/card.js'
 
 enableValidation({
     formSelector: '.popup__content',
