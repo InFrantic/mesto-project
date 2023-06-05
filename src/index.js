@@ -6,11 +6,7 @@ import {
   createCard,
 } from "./components/cards.js";
 import { enableValidation } from "./components/validate.js";
-import {
-  openPopup,
-  closePopup,
-  popupOverylayAndEscClose,
-} from "./components/modal.js";
+import { openPopup, closePopup } from "./components/modal.js";
 
 //объявление переменных
 const buttonOpenEditProfileForm = document.querySelector(
@@ -48,8 +44,6 @@ buttonOpenAddCardForm.addEventListener("click", () => {
 popupCardsCloseButton.addEventListener("click", () => {
   closePopup(popupCards);
 });
-//фукнция закрытия попапов через оверлей и ESC
-popupOverylayAndEscClose();
 
 //функция самбита профиля
 function submitEditProfileForm(evt) {
@@ -79,10 +73,10 @@ renderInitialCards(initialCards);
 
 //валидация
 enableValidation({
-  formSelector: ".form",
-  inputSelector: ".form__input",
-  submitButtonSelector: ".popup__submit",
-  inactiveButtonClass: "popup__submit_inactive",
-  inputErrorClass: "popup__input_type-error",
-  errorClass: "popup__input_type-error_text",
+  formSelector: ".popup__form",
+  inputSelector: ".popup__input",
+  submitButtonSelector: ".popup__button",
+  inactiveButtonClass: "popup__button_disabled",
+  inputErrorClass: "popup__input_type_error",
+  errorClass: "popup__error_visible",
 });

@@ -25,7 +25,7 @@ function checkInputValidity(formElement, inputElement) {
   }
 }
 
-function setEventListeners(formElement) {
+function setEventListeners(formElement,) {
   const inputList = Array.from(formElement.querySelectorAll(".form__input"));
   const buttonElement = formElement.querySelector(".popup__submit");
   toggleButtonState(inputList, buttonElement);
@@ -43,7 +43,7 @@ function enableValidation() {
     setEventListeners(formElement);
   });
 }
-enableValidation();
+// enableValidation();
 
 function hasInvalidInput(inputList) {
   return inputList.some((inputElement) => {
