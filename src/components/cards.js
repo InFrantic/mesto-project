@@ -3,7 +3,7 @@ const popupPhotoScale = document.querySelector(".popup-img");
 const popupImgPhoto = document.querySelector(".popup-img__photo");
 const popupImgText = document.querySelector(".popup-img__text");
 const popupImgCloseButton = document.querySelector(".popup-img__close");
-
+const placesContainer = document.querySelector(".elements");
 export const initialCards = [
   {
     name: "Архыз",
@@ -40,16 +40,12 @@ export function renderInitialCards(item) {
 
 //функция создания карточки
 export function createCard(name, link) {
-  const placesContainer = document.querySelector(".elements");
   const placeElement = getCard(name, link);
   placesContainer.prepend(placeElement);
 }
 //функция открытия попапа "Увиличение картинки"
 export function showPopupPhotoScale(img, title) {
   openPopup(popupPhotoScale);
-  popupImgCloseButton.addEventListener("click", () => {
-    closePopup(popupPhotoScale);
-  });
   popupImgPhoto.src = img.src;
   popupImgPhoto.alt = `${title}.`;
   popupImgText.textContent = title;

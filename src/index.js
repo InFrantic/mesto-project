@@ -14,35 +14,39 @@ const buttonOpenEditProfileForm = document.querySelector(
 );
 const popupEditProfile = document.querySelector(".popup_edit-profile");
 const buttonOpenAddCardForm = document.querySelector(".profile__add-button");
-const buttonCloseEditProfileForm = document.querySelector(".popup__close");
 const popupCards = document.querySelector(".popup_cards");
-const popupCardsCloseButton = document.querySelector(".popup-cards__close");
 const profileName = document.querySelector(".profile__name");
 const profileStatus = document.querySelector(".profile__status");
-const formEditProfile = document.querySelector(".popup__form");
+const formEditProfile = document.forms["profile-form"];
 const nameInput = document.querySelector(".popup__name-input");
 const jobInput = document.querySelector(".popup__job-input");
-const formAddCard = document.querySelector(".popup-cards__form");
+const formAddCard = document.forms["card-form"];
 const nameCardInput = document.querySelector(".popup-cards__name-input");
 const urlCardInput = document.querySelector(".popup-cards__url-input");
-nameInput.value = profileName.textContent;
-jobInput.value = profileStatus.textContent;
+const buttonSubmitCards = document.querySelector(".popup-cards__submit");
+const popups = document.querySelectorAll(".popup");
+
+popups.forEach((popup) => {
+  popup.addEventListener("mousedown", (evt) => {
+    if (evt.target.classList.contains("popup_opened")) {
+      closePopup(popup);
+    }
+    if (evt.target.classList.contains("popup__close")) {
+      closePopup(popup);
+    }
+  });
+});
 
 //открытие попапа Редактировать профиль
 buttonOpenEditProfileForm.addEventListener("click", () => {
   openPopup(popupEditProfile);
+  nameInput.value = profileName.textContent;
+  jobInput.value = profileStatus.textContent;
 });
-//закрытие попапа Редактировать профиль
-buttonCloseEditProfileForm.addEventListener("click", () => {
-  closePopup(popupEditProfile);
-});
+
 //открытие попапа новое место
 buttonOpenAddCardForm.addEventListener("click", () => {
   openPopup(popupCards);
-});
-//закрытие попапа новое место
-popupCardsCloseButton.addEventListener("click", () => {
-  closePopup(popupCards);
 });
 
 //функция самбита профиля
@@ -51,8 +55,6 @@ function submitEditProfileForm(evt) {
   profileName.textContent = nameInput.value;
   profileStatus.textContent = jobInput.value;
   closePopup(popupEditProfile);
-  nameInput.value = profileName.textContent;
-  jobInput.value = profileStatus.textContent;
 }
 formEditProfile.addEventListener("submit", submitEditProfileForm);
 
@@ -73,10 +75,10 @@ renderInitialCards(initialCards);
 
 //валидация
 enableValidation({
-  formSelector: ".popup__form",
-  inputSelector: ".popup__input",
-  submitButtonSelector: ".popup__button",
-  inactiveButtonClass: "popup__button_disabled",
-  inputErrorClass: "popup__input_type_error",
-  errorClass: "popup__error_visible",
+  formSelector: ".form",
+  inputSelector: ".form__input",
+  submitButtonSelector: ".popup__submit",
+  inactiveButtonClass: "popup__submit_inactive",
+  inputErrorClass: "popup__input_type-error",
+  errorClass: "popup__input_type-error_text",
 });

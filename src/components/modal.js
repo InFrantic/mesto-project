@@ -1,17 +1,16 @@
-
-export function openPopup(popup) {
-  document.addEventListener("click", (evt) => {
-    evt.target.classList.remove("popup_opened");
-  });
-
-  popup.classList.add("popup_opened");
-  document.addEventListener("keydown", (evt) => {
-    if (evt.key === "Escape") {
-      popup.classList.remove("popup_opened");
-    }
-  });
+function closeByEscape(evt) {
+  if (evt.key === "Escape") {
+    const openedPopup = document.querySelector(".popup_opened");
+    closePopup(openedPopup);
+  }
 }
+export function openPopup(popup) {
+  popup.classList.add("popup_opened");
+  document.addEventListener("keydown", closeByEscape);
+}
+
 //универсальные функции открытия/закрытия попапов
 export function closePopup(popup) {
   popup.classList.remove("popup_opened");
+  document.removeEventListener("keydown", closeByEscape);
 }

@@ -53,7 +53,7 @@
           aria-label="закрыть"
         ></button>
         <h3 class="popup__title">Редактировать профиль</h3>
-        <form class="form popup__form" name="form" novalidate>
+        <form class="form popup__form" name="profile-form" novalidate>
           <input
             data-error-message="поле может содержать только латинские буквы, кириллические буквы, знаки дефиса и пробелы"
             pattern="[A-Za-zА-Яа-яЁё0-9\s\-]+$"
@@ -89,12 +89,12 @@
     <div class="popup popup_cards">
       <div class="popup-cards__container">
         <button
-          class="popup-cards__close"
+          class="popup__close popup-cards__close"
           type="button"
           aria-label="закрыть"
         ></button>
         <h3 class="popup-cards__title">Новое место</h3>
-        <form class="form popup-cards__form" name="form" novalidate>
+        <form class="form popup-cards__form" name="card-form" novalidate>
           <input
             pattern="[A-Za-zА-Яа-яЁё0-9\s\-]+$"
             id="cards-name__input"
@@ -106,6 +106,7 @@
             minlength="2"
             maxlength="30"
             required
+            data-error-message="поле может содержать только латинские буквы, кириллические буквы, знаки дефиса и пробелы"
           />
           <span class="cards-name__input-error popup__input-error"></span>
           <input
@@ -118,7 +119,9 @@
             required
           />
           <span class="url__input-error popup__input-error"></span>
-          <button class="popup__submit" type="submit">Сохранить</button>
+          <button class="popup-cards__submit popup__submit" type="submit">
+            Сохранить
+          </button>
         </form>
       </div>
     </div>
