@@ -23,8 +23,8 @@ const jobInput = document.querySelector(".popup__job-input");
 const formAddCard = document.forms["card-form"];
 const nameCardInput = document.querySelector(".popup-cards__name-input");
 const urlCardInput = document.querySelector(".popup-cards__url-input");
-const buttonSubmitCards = document.querySelector(".popup-cards__submit");
 const popups = document.querySelectorAll(".popup");
+const popupSubmit = document.querySelector(".popup__submit");
 
 popups.forEach((popup) => {
   popup.addEventListener("mousedown", (evt) => {
@@ -42,6 +42,8 @@ buttonOpenEditProfileForm.addEventListener("click", () => {
   openPopup(popupEditProfile);
   nameInput.value = profileName.textContent;
   jobInput.value = profileStatus.textContent;
+  popupSubmit.disabled = false;
+  popupSubmit.classList.remove("popup__submit_inactive");
 });
 
 //открытие попапа новое место
