@@ -1,47 +1,41 @@
-import { closePopup, openPopup } from "./modal.js";
+//импорты
+import { openPopup } from "./modal.js";
+import { HendleDeleteCard, handleLikeStatus } from "../index.js";
+
+//объявление переменных
 const popupPhotoScale = document.querySelector(".popup-img");
 const popupImgPhoto = document.querySelector(".popup-img__photo");
 const popupImgText = document.querySelector(".popup-img__text");
-const popupImgCloseButton = document.querySelector(".popup-img__close");
-const placesContainer = document.querySelector(".elements");
-export const initialCards = [
-  {
-    name: "Архыз",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg",
-  },
-  {
-    name: "Челябинская область",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg",
-  },
-  {
-    name: "Иваново",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg",
-  },
-  {
-    name: "Камчатка",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg",
-  },
-  {
-    name: "Холмогорский район",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg",
-  },
-  {
-    name: "Байкал",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg",
-  },
-];
+export const placesContainer = document.querySelector(".elements");
 
-//функция рендера карточки
-export function renderInitialCards(item) {
-  item.forEach(({ name, link }) => {
-    createCard(name, link);
+//функция проверки постановки лайка
+function isLiked(likes, userId) {
+  return likes.find((like) => {
+    return like._id === userId;
   });
 }
 
+//функция обновлениея статуса лайка
+export function statusLikeUpdate(cardElement, likes, userId) {
+  const elementLike = cardElement.querySelector(".element__like");
+  const likeEnumerator = cardElement.querySelector(".element__like_enumerator");
+  likeEnumerator.textContent = likes.length;
+  if (isLiked(likes, userId)) {
+    elementLike.classList.add("element__like_active");
+  } else {
+    elementLike.classList.remove("element__like_active");
+  }
+}
+
 //функция создания карточки
-export function createCard(name, link) {
-  const placeElement = getCard(name, link);
-  placesContainer.prepend(placeElement);
+export function createCard(data, container, userId) {
+  const placeElement = getCard(
+    data,
+    userId,
+    HendleDeleteCard,
+    handleLikeStatus
+  );
+  container.prepend(placeElement);
 }
 //функция открытия попапа "Увиличение картинки"
 export function showPopupPhotoScale(img, title) {
@@ -51,30 +45,40 @@ export function showPopupPhotoScale(img, title) {
   popupImgText.textContent = title;
 }
 //функция получения карточки
-export function getCard(name, link) {
+export function getCard(data, userId, HendleDeleteCard, handleLikeStatus) {
   const placeTemplate = document.querySelector("#element-template").content;
   const placeElement = placeTemplate.cloneNode(true);
   const elementImg = placeElement.querySelector(".element__photo");
   const elementTitle = placeElement.querySelector(".element__title");
   const elementTrash = placeElement.querySelector(".element__delete");
   const elementLike = placeElement.querySelector(".element__like");
-
-  elementTitle.textContent = name;
-  elementImg.src = link;
-  elementImg.alt = `${name}.`;
-
-  elementTrash.addEventListener("click", () => deleteElement(elementTrash));
-  elementLike.addEventListener("click", () => likeElement(elementLike));
-  elementImg.addEventListener("click", () =>
-    showPopupPhotoScale(elementImg, name)
+  const cardElement = placeElement.querySelector(".element");
+  elementTitle.textContent = data.name;
+  elementImg.src = data.link;
+  elementImg.alt = data.name;
+  statusLikeUpdate(cardElement, data.likes, userId);
+  elementTrash.addEventListener("click", () =>
+    HendleDeleteCard(data._id, cardElement)
   );
-
+  elementLike.addEventListener("click", () =>
+    handleLikeStatus(
+      data._id,
+      elementLike.classList.contains("element__like_active"),
+      cardElement
+    )
+  );
+  elementImg.addEventListener("click", () =>
+    showPopupPhotoScale(elementImg, data.name)
+  );
+  if (data.owner._id !== userId) {
+    elementTrash.remove();
+  }
   return placeElement;
 }
 
 //функция удаления карточки
-export function deleteElement(dbutton) {
-  dbutton.closest(".element").remove();
+export function deleteElement(element) {
+  element.remove();
 }
 
 //функция лайка карточки

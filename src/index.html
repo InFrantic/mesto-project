@@ -19,11 +19,14 @@
 
       <main class="content">
         <section class="profile">
-          <img
-            class="profile__avatar"
-            src="<%=require('./images/image.png')%>"
-            alt="Аватарка"
-          />
+          <div class="avatarblock">
+            <button class="profile__avatar-button"></button>
+            <img
+              class="profile__avatar"
+              src="<%=require('./images/image.png')%>"
+              alt="Аватарка"
+            />
+          </div>
           <div class="profile__info">
             <h2 class="profile__name">Жак-Ив Кусто</h2>
             <button
@@ -140,17 +143,21 @@
           aria-label="закрыть"
         ></button>
         <h3 class="popup__title">Редактировать аватар</h3>
-        <form class="popup__form popup-avatar__form" name="form" novalidate>
+        <form
+          class="form popup__form popup-avatar__form"
+          name="avatar"
+          novalidate
+        >
           <input
-            id="avatar-input"
-            class="popup_avatar__input"
+            id="avatar__input"
+            class="form__input popup_avatar__input"
             type="url"
-            name="description"
-            placeholder="Ваш новый аватар"
+            name="avatar-input"
+            placeholder="Ссылка на ваш новый аватар"
             autocomplete="off"
             required
           />
-
+          <span class="avatar__input-error popup__input-error"></span>
           <button class="popup__submit" type="submit">Сохранить</button>
         </form>
       </div>
@@ -161,7 +168,10 @@
         <img class="element__photo" />
         <div class="element__title-block">
           <h2 class="element__title"></h2>
-          <button class="element__like"></button>
+          <div class="element__like-block">
+            <button class="element__like"></button>
+            <p class="element__like_enumerator"></p>
+          </div>
         </div>
       </article>
     </template>

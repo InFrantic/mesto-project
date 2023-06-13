@@ -1,4 +1,5 @@
 .popup__input_type-error_text{
     color:red;
     visibility: visible;
+    display: block;
 }
