@@ -88,7 +88,7 @@ getAllData()
   });
 
 //функция удаление карточки с сервера
-export function HendleDeleteCard(cardId, cardElement) {
+export function handleDeleteCard(cardId, cardElement) {
   deleteCard(cardId)
     .then(() => {
       deleteElement(cardElement);

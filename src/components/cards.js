@@ -1,6 +1,6 @@
 //импорты
 import { openPopup } from "./modal.js";
-import { HendleDeleteCard, handleLikeStatus } from "../index.js";
+import { handleDeleteCard, handleLikeStatus } from "../index.js";
 
 //объявление переменных
 const popupPhotoScale = document.querySelector(".popup-img");
@@ -32,7 +32,7 @@ export function createCard(data, container, userId) {
   const placeElement = getCard(
     data,
     userId,
-    HendleDeleteCard,
+    handleDeleteCard,
     handleLikeStatus
   );
   container.prepend(placeElement);
@@ -45,7 +45,7 @@ export function showPopupPhotoScale(img, title) {
   popupImgText.textContent = title;
 }
 //функция получения карточки
-export function getCard(data, userId, HendleDeleteCard, handleLikeStatus) {
+export function getCard(data, userId, handleDeleteCard, handleLikeStatus) {
   const placeTemplate = document.querySelector("#element-template").content;
   const placeElement = placeTemplate.cloneNode(true);
   const elementImg = placeElement.querySelector(".element__photo");
@@ -58,7 +58,7 @@ export function getCard(data, userId, HendleDeleteCard, handleLikeStatus) {
   elementImg.alt = data.name;
   statusLikeUpdate(cardElement, data.likes, userId);
   elementTrash.addEventListener("click", () =>
-    HendleDeleteCard(data._id, cardElement)
+    handleDeleteCard(data._id, cardElement)
   );
   elementLike.addEventListener("click", () =>
     handleLikeStatus(
