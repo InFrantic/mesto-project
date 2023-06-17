@@ -5,10 +5,19 @@
   "main": "index.js",
   "scripts": {
     "build": "webpack --mode production",
+<<<<<<< HEAD
     "dev": "webpack serve"
   },
   "keywords": [],
   "author": "",
+=======
+    "dev": "webpack serve",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
+  },
+  "keywords": [],
+  "author": "InFrantic",
+>>>>>>> 4736fe3 (meh)
   "license": "ISC",
   "dependencies": {
     "core-js": "^3.30.2",
@@ -22,6 +31,10 @@
     "clean-webpack-plugin": "^4.0.0",
     "css-loader": "^6.7.3",
     "cssnano": "^6.0.1",
+<<<<<<< HEAD
+=======
+    "gh-pages": "^5.0.0",
+>>>>>>> 4736fe3 (meh)
     "html-webpack-plugin": "^5.5.1",
     "mini-css-extract-plugin": "^2.7.5",
     "postcss-loader": "^7.3.0",

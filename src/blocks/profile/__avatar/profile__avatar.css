@@ -1,6 +1,14 @@
+<<<<<<< HEAD
 .profile__avatar {
   border-radius: 50%;
   max-width: 120px;
   min-height: 120px;
   object-fit: cover;
+=======
+.profile__avatar {
+  border-radius: 50%;
+  max-width: 120px;
+  min-height: 120px;
+  object-fit: cover;
+>>>>>>> 4736fe3 (meh)
 }

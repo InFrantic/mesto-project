@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 .popup__content {
     width: 430px;
     display: flex;
@@ -8,4 +9,16 @@
     .popup__content {
         width: 282px;
     }
+=======
+.popup__content {
+    width: 430px;
+    display: flex;
+    flex-direction: column;
+    border: none;
+}
+@media screen and (max-width: 767px) {
+    .popup__content {
+        width: 282px;
+    }
+>>>>>>> 4736fe3 (meh)
 }

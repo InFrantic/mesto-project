@@ -1,5 +1,12 @@
+<<<<<<< HEAD
 .popup_opened {
     display: flex;
     visibility: visible;
     opacity: 1;
+=======
+.popup_opened {
+    display: flex;
+    visibility: visible;
+    opacity: 1;
+>>>>>>> 4736fe3 (meh)
 }

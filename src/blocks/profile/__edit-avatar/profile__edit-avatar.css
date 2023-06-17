@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 .profile__edit-avatar {
   border-radius: 50%;
   width: 120px;
@@ -9,3 +10,39 @@
   outline: none;
   position: relative;
 }
+=======
+.profile__edit-avatar {
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  margin: 0;
+  padding: 0;
+  background: none;
+  border: none;
+  outline: none;
+  position: relative;
+  cursor: pointer;
+}
+
+.profile__edit-avatar::after {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  content: url('../../../images/edit-avatar.svg');
+  visibility: hidden;
+  background: rgba(0, 0, 0, 0);
+  width: 26px;
+  height: 26px;
+}
+
+.profile__edit-avatar:hover .profile__avatar {
+  cursor: pointer;
+  opacity: .4;
+}
+
+.profile__edit-avatar:hover::after {
+  cursor: pointer;
+  visibility: visible;
+}
+>>>>>>> 4736fe3 (meh)

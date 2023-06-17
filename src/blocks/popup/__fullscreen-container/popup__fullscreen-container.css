@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 .popup__fullscreen-container {
     position: relative;
     display: flex;
@@ -6,4 +7,14 @@
     padding: 0;
     max-width: 75vw;
     max-height: 75vh;
+=======
+.popup__fullscreen-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    padding: 0;
+    max-width: 75vw;
+    max-height: 75vh;
+>>>>>>> 4736fe3 (meh)
   }

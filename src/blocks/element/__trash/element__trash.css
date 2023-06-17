@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 .element__trash {
     width: 18px;
     height: 19px;
@@ -14,4 +15,22 @@
 .element__trash:hover {
     opacity: 0.6;
     cursor: pointer;
+=======
+.element__trash {
+    width: 18px;
+    height: 19px;
+    margin: 20px 20px 0;
+    border: none;
+    background-image: url(../../../images/Trash.svg);
+    background-color: rgba(0, 0, 0, 0);
+    justify-self: end;
+    align-self: start;
+    grid-row: 1;
+    grid-column: 2;
+}
+
+.element__trash:hover {
+    opacity: 0.6;
+    cursor: pointer;
+>>>>>>> 4736fe3 (meh)
 }

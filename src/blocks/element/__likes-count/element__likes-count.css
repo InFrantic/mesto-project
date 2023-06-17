@@ -1,0 +1,12 @@
+.element__likes-count {
+    font-family: 'Inter';
+    font-style: normal;
+    text-align: center;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 16px;
+    color: #000;
+    grid-row: 3;
+    grid-column: 2;
+    margin: 0 auto auto;
+}

@@ -1,1 +1,14 @@
+<<<<<<< HEAD
 
+=======
+pwd
+/Users/students-yandex/dev/mesto-project
+
+git branch
+* main
+develop
+
+touch .nojekyll
+git add . && git commit -m "added nojekyll"
+git push
+>>>>>>> 4736fe3 (meh)

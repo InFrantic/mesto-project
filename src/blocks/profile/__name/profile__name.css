@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 .profile__name {
     font-style: normal;
     font-weight: 500;
@@ -17,4 +18,25 @@
         line-height: 33px;
         text-align: center;
     }
+=======
+.profile__name {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 42px;
+    line-height: 48px;
+    margin: 0;
+    grid-row: 1;
+    grid-column: 1;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+@media screen and (max-width: 767px) {
+    .profile__name {
+        font-size: 27px;
+        line-height: 33px;
+        text-align: center;
+    }
+>>>>>>> 4736fe3 (meh)
 }

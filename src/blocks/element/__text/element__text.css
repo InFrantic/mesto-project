@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 .element__text {
     font-style: normal;
     font-weight: 900;
@@ -10,4 +11,19 @@
     white-space: nowrap;
     overflow: hidden;
     margin-left: 21px;
+=======
+.element__text {
+    font-style: normal;
+    font-weight: 900;
+    font-size: 24px;
+    line-height: 29px;
+    color: #000000;
+    grid-row: 2/4;
+    grid-column: 1;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    margin-left: 21px;
+    padding: 0;
+>>>>>>> 4736fe3 (meh)
 }
