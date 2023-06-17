@@ -18,6 +18,6 @@
 - Валидация
 - JavaScript
 
-
+https://infrantic.github.io/mesto-project/
 
 Весь проект выполнен в редакторе *VS Code*.  
