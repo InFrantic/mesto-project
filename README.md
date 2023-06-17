@@ -15,7 +15,6 @@
 - медиа-запросы
 - Grid Layout
 - pop-up (диалоговое окно)
-<<<<<<< HEAD
 - Валидация
 - JavaScript
 
