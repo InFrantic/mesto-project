@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 .profile {
     max-width: 880px;
     display: flex;
@@ -18,25 +17,4 @@
         flex-direction: column;
         justify-content: center;
     }
-=======
-.profile {
-    max-width: 880px;
-    display: flex;
-    margin: 0 auto;
-    align-items: center;
-}
-
-@media screen and (max-width: 1023px) {
-    .profile {
-        margin: 0 50px 0;
-    }
-}
-
-@media screen and (max-width: 767px) {
-    .profile {
-        margin: 0 19px 0;
-        flex-direction: column;
-        justify-content: center;
-    }
->>>>>>> 4736fe3 (meh)
 }
