@@ -18,7 +18,6 @@
 - Валидация
 - JavaScript
 
-Весь проект выполнен в редакторе *VS Code*.  
+https://infrantic.github.io/mesto-project/
 
-## Авторы  
-*Ракин Владислав* **(InFrantic)**
+Весь проект выполнен в редакторе *VS Code*.  
