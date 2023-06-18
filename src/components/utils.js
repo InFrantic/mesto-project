@@ -12,7 +12,6 @@ export const elements = document.querySelector('.elements');
 export const element = elements.querySelector('.element');
 export const template = document.querySelector('#template');
 export const popupActiveClass = 'popup_opened';
-export const buttonSubmitElement = document.querySelector('.popup__save');
 export const templateElement = document.querySelector('#template').content;
 export const newElement = templateElement.querySelector('.element').cloneNode(true);
 export const elementImage = newElement.querySelector('#image');
@@ -22,3 +21,13 @@ export const editAvatar = document.querySelector('.popup_avatar');
 export const changeAvatar = document.querySelector('#avatar');
 export const avatarInput = document.querySelector('#inputavatar');
 export const profileAvatar = document.querySelector('.profile__avatar');
+
+export function setStatusButton({ buttonElement, text, disabled }) {
+    if (disabled) {
+        buttonElement.disabled = 'disabled';
+    } else {
+        buttonElement.disabled = false;
+    }
+
+    buttonElement.textContent = text;
+}

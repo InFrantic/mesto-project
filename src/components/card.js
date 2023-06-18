@@ -1,9 +1,8 @@
-import { popupAddElement, imgFullscreen, titlePopup, elements, element } from './utils.js'
+import { popupAddElement, imgFullscreen, titlePopup, elements, setStatusButton, buttonSubmitElement, element } from './utils.js'
 import { showPopup, hidePopup } from './modal.js'
 import { addNewCard, deleteMyCard, addLike, removeLike } from './api.js'
 
 const addElementSubmit = popupAddElement.querySelector('#newplace');
-addElementSubmit.addEventListener('submit', addElementCard);
 
 const templateElement = document.querySelector('#template').content;
 
@@ -35,8 +34,6 @@ export function createElem(data, userId, cardId, ownerId) {
     elementImage.src = data.link;
     elementImage.alt = data.name;
 
-    addEventListener(newElement, data)
-
     return newElement;
 }
 
@@ -53,21 +50,28 @@ export function renderCard(data, ownerId, cardId, userId) {
     elements.prepend(createElem(data, ownerId, cardId, userId))
 }
 
-function addElementCard(evt) {
+addElementSubmit.addEventListener('submit', function (evt) {
+    const buttonSubmitElement = document.querySelector('#createsave');
+    setStatusButton({ buttonElement: buttonSubmitElement, text: 'Сохраняем...', disabled: true })
     evt.preventDefault()
     const addplace = evt.target.place.value;
     const addLink = evt.target.link.value;
-     addNewCard({ name: addplace, link: addLink })
+    addNewCard({ name: addplace, link: addLink })
         .then((data) => {
             const ownerId = data.owner._id
             const userId = data.owner._id
             const cardId = data._id
             renderCard(data, ownerId, cardId, userId)
-            console.log(data, ownerId, cardId, userId)
             evt.target.reset();
             hidePopup(popupAddElement);
         })
-}
+        .catch((err) => {
+            console.error(err);
+        })
+        .finally(() => {
+            setStatusButton({ buttonElement: buttonSubmitElement, text: 'Создать', disabled: false })
+        })
+})
 
 function deleteBtn(element, cardId) {
     deleteMyCard(cardId)

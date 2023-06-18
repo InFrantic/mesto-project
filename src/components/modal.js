@@ -1,4 +1,4 @@
-import { buttonSubmitElement, popups, profileAvatar, avatarInput, changeAvatar, editProfile, editAvatar, popupAddElement, profileName, profileJob, profileFormAdd, nameInput, jobInput, popupActiveClass } from './utils.js'
+import { setStatusButton, popups, profileAvatar, avatarInput, changeAvatar, editProfile, editAvatar, popupAddElement, profileName, profileJob, profileFormAdd, nameInput, jobInput, popupActiveClass } from './utils.js'
 import { editUsersMe, getUsersMe, newAvatar } from './api.js'
 
 popups.forEach(popup => {
@@ -28,6 +28,7 @@ function closeByEsc(evt) {
 }
 
 profileFormAdd.addEventListener('submit', function () {
+    const buttonSubmitElement = document.querySelector('#editsave')
     setStatusButton({ buttonElement: buttonSubmitElement, text: 'Сохраняем...', disabled: true })
     editUsersMe({ name: nameInput.value, about: jobInput.value })
         .catch((err) => {
@@ -36,16 +37,13 @@ profileFormAdd.addEventListener('submit', function () {
         .finally(() => {
             setStatusButton({ buttonElement: buttonSubmitElement, text: 'Сохранить', disabled: false })
         })
-        .then(() => {
-            getUsersMe()
-                .then((res) => {
-                    profileName.textContent = res.name;
-                    profileJob.textContent = res.about;
-                    hidePopup(editProfile);
-                })
-                .catch((err) => {
-                    console.log(err);
-                })
+        .then((res) => {
+            profileName.textContent = res.name;
+            profileJob.textContent = res.about;
+            hidePopup(editProfile);
+        })
+        .catch((err) => {
+            console.log(err);
         })
 });
 
@@ -67,25 +65,13 @@ function openEditProfilePopup() {
     showPopup(editProfile);
 }
 
-function setStatusButton({ buttonElement, text, disabled }) {
-    if (disabled) {
-        buttonElement.disabled = 'disabled';
-    } else {
-        buttonElement.disabled = false;
-    }
-
-    buttonElement.textContent = text;
-}
-
 changeAvatar.addEventListener('submit', function () {
+    const buttonSubmitElement = document.querySelector('#avatarsave')
     setStatusButton({ buttonElement: buttonSubmitElement, text: 'Сохраняем...', disabled: true })
     newAvatar({ avatar: avatarInput.value })
-        .then(() => {
-            getUsersMe()
-                .then((res) => {
-                    profileAvatar.src = res.avatar;
-                    hidePopup(editAvatar);
-                })
+        .then((res) => {
+            profileAvatar.src = res.avatar;
+            hidePopup(editAvatar);
         })
         .catch((err) => {
             console.error(err);
