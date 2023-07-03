@@ -1,11 +1,10 @@
 //импорты
-import { openPopup } from "./modal.js";
 import { handleDeleteCard, handleLikeStatus } from "../index.js";
 
 //объявление переменных
-const popupPhotoScale = document.querySelector(".popup-img");
-const popupImgPhoto = document.querySelector(".popup-img__photo");
-const popupImgText = document.querySelector(".popup-img__text");
+export const popupPhotoScale = document.querySelector(".popup-img");
+export const popupImgPhoto = document.querySelector(".popup-img__photo");
+export const popupImgText = document.querySelector(".popup-img__text");
 export const placesContainer = document.querySelector(".elements");
 
 //функция проверки постановки лайка
@@ -84,4 +83,84 @@ export function deleteElement(element) {
 //функция лайка карточки
 export function likeElement(like) {
   like.classList.toggle("element__like_active");
+}
+
+export default class Card {
+  constructor({
+    data,
+    userId,
+    handleDeleteCard,
+    handleLikeStatus,
+    templateSelector,
+    showPopupPhotoScale,
+  }) {
+    this.data = data;
+    this.name = data.name;
+    this.link = data.link;
+    this.Id = userId._id;
+    this.ownerId = data.owner_.id;
+    this.handleDeleteCard = handleDeleteCard;
+    this.handleLikeStatus = handleLikeStatus;
+    this._templateSelector = templateSelector;
+    this.like = data.like;
+    this.enumerator = data.enumerator;
+    this.showPopupPhotoScale = showPopupPhotoScale;
+  }
+  _getTemplateElement() {
+    const templateElement = document.querySelector(
+      this._templateSelector
+    ).content;
+    const cardElement = templateElement.cloneNode(true);
+    return cardElement;
+  }
+  _isLiked() {
+    return this.likes.find((like) => {
+      return like._id === this.Id;
+    });
+  }
+  _statusLikeUpdate(data) {
+    this._likes = data.likes;
+    this.likeEnumerator.textContent = data.likes.length;
+    if (this._isLiked()) {
+      this.elementLike.classList.add("element__like_active");
+    } else {
+      this.elementLike.classList.remove("element__like_active");
+    }
+  }
+  _setEventListeners() {
+    this.elementTrash.addEventListener("click", () =>
+      handleDeleteCard(this.data._id, this.cardElement)
+    );
+    this.elementLike.addEventListener("click", () =>
+      this.handleLikeStatus(
+        this.data._id,
+        this.elementLike.classList.contains("element__like_active"),
+        this.cardElement
+      )
+    );
+    this.elementImg.addEventListener("click", () =>
+      this.showPopupPhotoScale(this.elementImg, this.data.name)
+    );
+  }
+  createCard() {
+    this.placeElement = this._getTemplateElement();
+    this.elementImg =
+      this.placeElement.document.querySelector(".element__photo");
+    this.elementTitle =
+      this.placeElement.document.querySelector(".element__title");
+    this.elementTrash =
+      this.placeElement.document.querySelector(".element__delete");
+    this.elementLike =
+      this.placeElement.document.querySelector(".element__like");
+    this.cardElement = this.placeElement.document.querySelector(".element");
+    this.elementImg.src = this.link;
+    this.elementImg.alt = this.name;
+    this.elementTitle.textContent = this.name;
+    this._setEventListeners();
+
+    if (this.ownerId !== this.Id) {
+      this.elementTrash.remove();
+    }
+    return this.placeElement;
+  }
 }

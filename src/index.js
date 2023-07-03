@@ -5,18 +5,20 @@ import {
   placesContainer,
   deleteElement,
   statusLikeUpdate,
+  showPopupPhotoScale,
+  popupImgPhoto,
+  popupImgText,
+  popupPhotoScale,
 } from "./components/cards.js";
-import { enableValidation } from "./components/validate.js";
-import { openPopup, closePopup } from "./components/modal.js";
-import {
-  editUserProfile,
-  addCard,
-  changeAvatar,
-  getAllData,
-  deleteCard,
-  changelikeStatus,
-} from "./components/api.js";
+import Api from "./components/api.js";
 import { setButtonStatus } from "./components/utilits.js";
+import { settings } from "./components/utilits.js";
+import FormValidator from "./components/FormValidator";
+import UserInfo from "./components/UserInfo";
+import Popup from "./components/modal.js";
+import Card from "./components/cards.js";
+import PopupWithForm from "./components/PopupWithForm";
+import PopupWithImage from "./components/PopupWithImage";
 //объявление переменных
 const buttonOpenEditProfileForm = document.querySelector(
   ".profile__edit-button"
@@ -32,13 +34,28 @@ const jobInput = document.querySelector(".popup__job-input");
 const formAddCard = document.forms["card-form"];
 const nameCardInput = document.querySelector(".popup-cards__name-input");
 const urlCardInput = document.querySelector(".popup-cards__url-input");
-const popups = document.querySelectorAll(".popup");
+export const popups = document.querySelectorAll(".popup");
 const popupSubmit = document.querySelector(".popup__submit");
 const popupAvatar = document.querySelector(".popup_avatar");
 const avatarButton = document.querySelector(".profile__avatar-button");
 const avatarInput = document.querySelector(".popup_avatar__input");
 const profilePhoto = document.querySelector(".profile__avatar");
 const avatarForm = document.forms["avatar"];
+
+const api = new Api({
+  basicUrl: "https://nomoreparties.co/v1/plus-cohort-25",
+  headers: {
+    authorization: "826428a0-055f-4d25-b211-48bad9e30bcd",
+    "content-type": "application/json",
+  },
+});
+
+const formValidatorEditProfile = new FormValidator(settings, formEditProfile);
+formValidatorEditProfile.enableValidation();
+const formValidationFormAddCard = new FormValidator(settings, formAddCard);
+formValidationFormAddCard.enableValidation();
+const formValidationAvatarForm = new FormValidator(settings, avatarForm);
+formValidationAvatarForm.enableValidation();
 
 //общая функция для попапов для закрытия через ESC и Крестик
 popups.forEach((popup) => {
@@ -54,17 +71,17 @@ popups.forEach((popup) => {
 
 //открытие попапа замены аватара
 avatarButton.addEventListener("click", () => {
-  openPopup(popupAvatar);
+  popupAvatar.openPopup();
 });
 
-//открытие попапа Редактировать профиль
-buttonOpenEditProfileForm.addEventListener("click", () => {
-  openPopup(popupEditProfile);
-  nameInput.value = profileName.textContent;
-  jobInput.value = profileStatus.textContent;
-  popupSubmit.disabled = false;
-  popupSubmit.classList.remove("popup__submit_inactive");
-});
+// //открытие попапа Редактировать профиль
+// buttonOpenEditProfileForm.addEventListener("click", () => {
+//   openPopup(popupEditProfile);
+//   nameInput.value = profileName.textContent;
+//   jobInput.value = profileStatus.textContent;
+//   popupSubmit.disabled = false;
+//   popupSubmit.classList.remove("popup__submit_inactive");
+// });
 
 //открытие попапа новое место
 buttonOpenAddCardForm.addEventListener("click", () => {
@@ -73,12 +90,12 @@ buttonOpenAddCardForm.addEventListener("click", () => {
 
 //получение данных профиля и карточек с сервера
 let userId = null;
-getAllData()
+api
+  .getAllData()
   .then(([user, cards]) => {
-    profileName.textContent = user.name;
-    profileStatus.textContent = user.about;
-    profilePhoto.src = user.avatar;
     userId = user._id;
+    userInfo.editUserProfile(user);
+
     cards.reverse().forEach((card) => {
       createCard(card, placesContainer, userId);
     });
@@ -86,7 +103,7 @@ getAllData()
   .catch((error) => {
     console.log(`Упс, Ошибка - ${error}`);
   });
-
+const userInfo = new UserInfo(profileName, profileStatus, profilePhoto);
 //функция удаление карточки с сервера
 export function handleDeleteCard(cardId, cardElement) {
   deleteCard(cardId)
@@ -110,33 +127,34 @@ export function handleLikeStatus(likeId, isLiked, cardElement) {
 }
 
 //функция самбита профиля
-function submitEditProfileForm(evt) {
-  setButtonStatus({
-    button: popupSubmit,
-    disabled: true,
-    text: "Сохраняем...",
-  });
-  evt.preventDefault();
-  editUserProfile(nameInput, jobInput)
-    .then((data) => {
-      profileName.textContent = data.name;
-      profileStatus.textContent = data.about;
-      closePopup(popupEditProfile);
-      popupSubmit.disabled = true;
-    })
-    .catch((error) => {
-      console.log(`Упс, Ошибка - ${error}`);
-    })
-    .finally(() => {
-      setButtonStatus({
-        button: popupSubmit,
-        disabled: false,
-        text: "Сохранить",
-      });
-    });
-}
+// function submitEditProfileForm(evt) {
+//   setButtonStatus({
+//     button: popupSubmit,
+//     disabled: true,
+//     text: "Сохраняем...",
+//   });
+//   evt.preventDefault();
+//   api
+//     .editUserProfile(nameInput, jobInput)
+//     .then((data) => {
+//       profileName.textContent = data.name;
+//       profileStatus.textContent = data.about;
+//       closePopup(popupEditProfile);
+//       popupSubmit.disabled = true;
+//     })
+//     .catch((error) => {
+//       console.log(`Упс, Ошибка - ${error}`);
+//     })
+//     .finally(() => {
+//       setButtonStatus({
+//         button: popupSubmit,
+//         disabled: false,
+//         text: "Сохранить",
+//       });
+//     });
+// }
 
-formEditProfile.addEventListener("submit", submitEditProfileForm);
+// formEditProfile.addEventListener("submit", submitEditProfileForm);
 
 //функция самбита новой карточки
 function submitFormAddCard(evt) {
@@ -194,12 +212,20 @@ function submitAvatar(evt) {
 
 avatarForm.addEventListener("submit", submitAvatar);
 
-//валидация
-enableValidation({
-  formSelector: ".form",
-  inputSelector: ".form__input",
-  submitButtonSelector: ".popup__submit",
-  inactiveButtonClass: "popup__submit_inactive",
-  inputErrorClass: "popup__input_type-error",
-  errorClass: "popup__input_type-error_text",
+const popupProfile = new PopupWithForm({
+  popup: popupEditProfile,
+  callbackFormSubmit: (data) => {
+    api
+      .editUserProfile(data)
+      .then((dataItem) => {
+        userInfo.editUserProfile(dataItem);
+        popupProfile.closePopup();
+      })
+      .catch((error) => console.log(error));
+  },
+});
+popupProfile.setEventListeners();
+
+buttonOpenEditProfileForm.addEventListener("click", () => {
+  popupProfile.openPopup();
 });
