@@ -277,4 +277,4 @@ const createElementCard = (data) => {
   return card.generate();
 };
 const popupImage = new PopupWithImage({ popupImgPhoto });
-123
+1239999
