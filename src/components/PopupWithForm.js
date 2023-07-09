@@ -28,15 +28,21 @@ export default class PopupWithForm extends Popup {
       this.callbackFormSubmit(this._getInputValues());
     });
   }
-//текс кнопки при обработке 
-  _buttonLoading(disabled) {
-    if(disabled){
-      this.button.disabled = true
-      this.button.textContent = 'Сохраняем...'
+  //текс кнопки при обработке
+  buttonLoading(disabled) {
+    if (disabled) {
+      this.button.disabled = true;
+      this.button.textContent = "Сохраняем...";
+    } else {
+      this.button.disabled = false;
+      this.button.textContent = "Сохранить";
     }
-    else {
-      this.button.disabled = false
-      this.button.textContent = 'Сохранить'
-    }
+  }
+  setInputValues() {
+    this.inputList = {}
+    this.inputs.forEach((input) => {
+      input.value = [input.name];
+    });
+    return this.inputList
   }
 }

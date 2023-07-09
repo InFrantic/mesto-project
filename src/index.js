@@ -22,6 +22,8 @@ const avatarButton = document.querySelector(".profile__avatar-button");
 const avatarForm = document.forms["avatar"];
 const element = document.querySelector(".elements");
 const popupPhotoScale = document.querySelector(".popup-img");
+const nameInput = document.querySelector(".popup__name-input");
+const jobInput = document.querySelector(".popup__job-input");
 
 const api = new Api({
   basicUrl: "https://nomoreparties.co/v1/plus-cohort-25",
@@ -51,11 +53,14 @@ const userInfo = new UserInfo(
   ".profile__status",
   ".profile__avatar"
 );
+
 //попап профиля
 const popupProfile = new PopupWithForm({
   popup: popupEditProfile,
+
   callbackFormSubmit: (data) => {
-    popupProfile._buttonLoading(true);
+    popupProfile.buttonLoading(true);
+
     api
       .editUserProfile(data)
       .then((res) => {
@@ -67,24 +72,28 @@ const popupProfile = new PopupWithForm({
         console.log(err);
       })
       .finally(() => {
-        popupProfile._buttonLoading(false);
+        popupProfile.buttonLoading(false);
       });
   },
 });
+
 popupProfile.setEventListeners();
 buttonOpenEditProfileForm.addEventListener("click", () => {
+  const objectInfo = userInfo.getUserInfo();
+  nameInput.value = objectInfo.name;
+  jobInput.value = objectInfo.about;
+  formValidatorEditProfile.resetValidation()
   popupProfile.openPopup();
 });
 //валидация попапа Профиля
 const formValidatorEditProfile = new FormValidator(settings, formEditProfile);
 formValidatorEditProfile.enableValidation();
 
-
 //попап для добавление карточек
 const popupCard = new PopupWithForm({
   popup: popupCards,
   callbackFormSubmit: (data) => {
-    popupCard._buttonLoading(true)
+    popupCard.buttonLoading(true);
     api
       .addCard(data)
       .then((res) => {
@@ -93,13 +102,15 @@ const popupCard = new PopupWithForm({
       })
       .catch((err) => {
         console.log(err);
-      }).finally(()=>{
-        popupCard._buttonLoading(false)
       })
+      .finally(() => {
+        popupCard.buttonLoading(false);
+      });
   },
 });
 popupCard.setEventListeners();
 buttonOpenAddCardForm.addEventListener("click", () => {
+  formValidationFormAddCard.resetValidation()
   popupCard.openPopup();
 });
 //валидация попапа добавление карточки
@@ -110,7 +121,7 @@ formValidationFormAddCard.enableValidation();
 const avatarPopup = new PopupWithForm({
   popup: popupAvatar,
   callbackFormSubmit: (data) => {
-    avatarPopup._buttonLoading(true)
+    avatarPopup.buttonLoading(true);
     api
       .changeAvatar(data)
       .then((res) => {
@@ -119,13 +130,15 @@ const avatarPopup = new PopupWithForm({
       })
       .catch((err) => {
         console.log(err);
-      }).finally(()=>{
-        avatarPopup._buttonLoading(false)
       })
+      .finally(() => {
+        avatarPopup.buttonLoading(false);
+      });
   },
 });
 avatarPopup.setEventListeners();
 avatarButton.addEventListener("click", () => {
+formValidationAvatarForm.resetValidation()
   avatarPopup.openPopup();
 });
 //валидация попапа Аватар
