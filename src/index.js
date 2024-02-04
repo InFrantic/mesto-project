@@ -28,7 +28,7 @@ const jobInput = document.querySelector(".popup__job-input");
 const api = new Api({
   basicUrl: "https://nomoreparties.co/v1/plus-cohort-25",
   headers: {
-    authorization: "826428a0-055f-4d25-b211-48bad9e30bcd",
+    authorization: "53c28d17-3f3f-4ac4-868e-9a47b851f277",
     "content-type": "application/json",
   },
 });
