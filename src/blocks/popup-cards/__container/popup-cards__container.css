@@ -1,0 +1,20 @@
+.popup-cards__container{
+    max-width:430px;
+    background: #FFF;
+    border-radius: 10px;
+    padding:34px 36px 37px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    position: relative;
+    box-sizing: border-box;
+    
+}
+
+@media screen and (max-width:879px) {
+    .popup-cards__container{
+        max-width:282px;
+        padding:25px 22px;
+    }
+    
+}

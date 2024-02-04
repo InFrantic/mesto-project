@@ -1,5 +1,12 @@
 .popup_opened {
-    display: flex;
     visibility: visible;
     opacity: 1;
+    transition: opacity .6s, visibility .6s;
+}
+
+
+@media screen and (max-width:879px){
+    .popup_opened{
+        margin:0;
+    }
 }

@@ -1,0 +1,12 @@
+.popup-cards_opened {
+    visibility: visible;
+    opacity: 1;
+    transition: opacity .6s, visibility .6s;
+}
+
+
+@media screen and (max-width:879px){
+    .popup-cards_opened{
+        margin:0;
+    }
+}

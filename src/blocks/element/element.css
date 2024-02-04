@@ -1,7 +1,4 @@
-.element {
-    display: grid;
-    background: #FFFFFF;
-    border-radius: 10px;
+.element{
+    margin:0 auto;
     position: relative;
-    grid-template-columns: 1fr;
 }

@@ -1,7 +1,7 @@
 {
-  "name": "mesto",
+  "name": "mesto-project",
   "version": "1.0.0",
-  "description": "Данный проект - в будущем интерактивная страница, куда можно добавлять фотографии, удалять их и ставить лайки.",
+  "description": "### Обзор",
   "main": "index.js",
   "scripts": {
     "build": "webpack --mode production",
@@ -9,27 +9,34 @@
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist"
   },
-  "keywords": [],
-  "author": "InFrantic",
-  "license": "ISC",
-  "dependencies": {
-    "core-js": "^3.30.2",
-    "jquery": "^3.7.0"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AgapkinRoma/mesto-project.git"
   },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AgapkinRoma/mesto-project/issues"
+  },
+  "homepage": "https://github.com/AgapkinRoma/mesto-project#readme",
   "devDependencies": {
-    "@babel/core": "^7.21.8",
-    "@babel/preset-env": "^7.21.5",
+    "@babel/core": "^7.22.1",
+    "@babel/preset-env": "^7.22.2",
     "autoprefixer": "^10.4.14",
     "babel-loader": "^9.1.2",
     "clean-webpack-plugin": "^4.0.0",
-    "css-loader": "^6.7.3",
+    "css-loader": "^6.8.1",
     "cssnano": "^6.0.1",
     "gh-pages": "^5.0.0",
     "html-webpack-plugin": "^5.5.1",
-    "mini-css-extract-plugin": "^2.7.5",
-    "postcss-loader": "^7.3.0",
-    "webpack": "^5.82.1",
+    "mini-css-extract-plugin": "^2.7.6",
+    "postcss-loader": "^7.3.2",
+    "webpack": "^5.84.1",
     "webpack-cli": "^5.1.1",
     "webpack-dev-server": "^4.15.0"
+  },
+  "dependencies": {
+    "core-js": "^3.30.2"
   }
 }
